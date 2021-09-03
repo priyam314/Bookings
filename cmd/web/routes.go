@@ -42,5 +42,20 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Get("/", handler.Repo.Home)
 	mux.Get("/about", handler.Repo.About)
 
+	// this function provides the functionality to serve the entire file
+	// system directory with indexes, takes input of "FileSystem interface"
+	// so gave that directory. As an output it returns Handler.
+	// content will be served from that directory, which here we say root dir
+	fileserver := http.FileServer(http.Dir("./static/"))
+
+	// Handle registers a new route with a matcher for the URL
+	// http.StripPrefix forwards the handling of the request to one you specify
+	// as its parameter, but before that it modifies the requested URL by
+	// striping off the specified prefix
+	// for e.g. if browser request he resource "/static/example.txt"
+	// StripPrefix will cut "/static/" and forward th modified request to the
+	// handler returned by http.FileServer(), so request resource is `/example.txt`
+	mux.Handle("/static/*", http.StripPrefix("/static", fileserver))
+
 	return mux
 }
