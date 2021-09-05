@@ -4,9 +4,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
     <style>
         .my-footer{
             height: 5em;
@@ -16,130 +17,105 @@
             color: #000053;
             font-size: 180%;
         }
+        .redText{
+            color:red;
+        }
+        .notie-container{
+            box-shadow: none;
+        }
     </style>
     <title>Hello, world!</title>
   </head>
   <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
         <div class="container-fluid">
-
             <a class="navbar-brand" href="#">Navbar</a>
-
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
                 aria-expanded="false" aria-label="Toggle navigation">
-
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">   
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    
+                    </li>  
                     <li class="nav-item">
                         <a class="nav-link" href="about.html">About</a>
                     </li>
-
-                    <li class="nav-item dropdown">
-                        
+                    <li class="nav-item dropdown">    
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Rooms
                         </a>
-
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">   
                             <li><a class="dropdown-item" href="generals.html">
                                 General's Qaurter
                                 </a>
-                            </li>
-                            
+                            </li> 
                             <li><a class="dropdown-item" href="major.html">
                                 Major suite's
                                 </a>
                             </li>
-
                             <li><hr class="dropdown-divider">
-                            </li>
-                            
+                            </li>  
                             <li><a class="dropdown-item" href="contact.html">contact</a>
                             </li>
                         </ul>
                     </li>
-
-                    <li class="nav-item">
-                        
+                    <li class="nav-item">     
                         <a class="nav-link" href="reservation.html" tabindex="-1" aria-disabled="true">
                             Book Now
                         </a>
                     </li>
                 </ul>
-
                 <form class="d-flex">
-
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">    
                     <button class="btn btn-outline-success" type="submit">Search</button>
-
                 </form>
             </div>
         </div>
     </nav>
-
-
     <div class="container">
-
         <div class="row">
-
             <div class="col-md-3"></div>
             <div class="col-md-6">
-
                 <h1 class="text-center mt-5"> 
                     Search for Availability
                 </h1>
-
-                <form action="reservation.html" method="get">
-
-                    <div class="row">
-
+                <form action="reservation.html" method="get" novalidate class="needs-validation">
+                    <div class="form-row">
                         <div class="col">
-
-                            <div class="form-group">
-
-                                <label for="start_date" class="form-label">
-                                    Starting Date
-                                </label>
-                                <input required type="date" class="form-control" id="start_date" name="start_date" aria-describedby="startdateHelp">
-                            </div>
-                        </div>
-
-                        <div class="col">
-
-                            <div class="form-group">
-                                <label for="end_date" class="form-label">
-                                    Ending Date
-                                </label>
-                                <input required type="date" class="form-control" id="end_date" name="end_date" aria-describedby="enddateHelp">
+                            <div class="form-row" id="reservation-dates">
+                                <div class="col">
+                                    <input required class="form-control" type="text" name="start" placeholder="Arrival Date">
+                                </div>
+                                <span> To </span>
+                                <div class="col">
+                                    <input required class="form-control" type="text" name="end" placeholder="Departure">
+                                </div>
                             </div>
                         </div>
                     </div>
-
                     <br>
-
                     <button type="submit" class="btn btn-primary">Search Availability</button>
                 </form>
-
             </div>
-
+        </div>
+        <div class="row">
+            <div class="col">
+                <p id="myPara">
+                    this is my para
+                </p>
+                <p>
+                    <button id="ColorButton" class="btn btn-outline-secondary">
+                        Click me
+                    </button>
+                </p>
+            </div>
         </div>
     </div>
-
     <div class="row my-footer">
         <div class="col text-center">
             Left
@@ -151,11 +127,55 @@
             Right
         </div>
     </div>
-
     <!-- Option 2: Separate Popper and Bootstrap JS -->
-    
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js">
+    </script>
+    <script src="https://unpkg.com/notie">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    </script>
+    <script>
+        (function () {
+            'use strict'
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            let forms = document.querySelectorAll('.needs-validation')
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+        document.getElementById("ColorButton").addEventListener("click",function(){
+            // notify("This is notify","success");
+            notifyModel("title", "<em>Hello, World</em>", "success", "My")
+        })
+        const elem = document.getElementById('reservation-dates');
+        const rangepicker = new DateRangePicker(elem, {
+            format: "yyyy-mm-dd",
+        })
+        function notify(msg, type){
+            notie.alert({
+                type: type,
+                text: msg,
+            })
+        }
+        function notifyModel(title, text, icon, confirmationButton){
+            Swal.fire({
+                title: title,
+                html    : text,
+                icon: icon,
+                confirmButtonText: confirmationButton,
+            })
+        }
+    </script>
   </body>
 </html>
