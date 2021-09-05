@@ -139,6 +139,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
     </script>
     <script>
+        let attention = prompt();
         (function () {
             'use strict'
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -156,7 +157,8 @@
         })()
         document.getElementById("ColorButton").addEventListener("click",function(){
             // notify("This is notify","success");
-            notifyModel("title", "<em>Hello, World</em>", "success", "My")
+            // notifyModel("title", "<em>Hello, World</em>", "success", "My")
+            attention.error({msg:"Oops!"})
         })
         const elem = document.getElementById('reservation-dates');
         const rangepicker = new DateRangePicker(elem, {
@@ -175,6 +177,60 @@
                 icon: icon,
                 confirmButtonText: confirmationButton,
             })
+        }
+        function prompt(){
+            let toast = function(c){
+                const {
+                    msg = "",
+                    icon = "success",
+                    position = "top-end",
+                } = c;
+                const Toast = Swal.mixin({
+                    toast: true,
+                    title: msg, 
+                    icon: icon,
+                    position: position,
+                    showConfirmButton: true,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    Toast.fire({})
+                }
+            let success = function(c){
+                const {
+                    msg= "",
+                    title= "",
+                    footer="",
+                } = c
+                Swal.fire({
+                    icon: 'success',
+                    title: title,
+                    text: msg,
+                    footer: footer,
+                })
+            }
+            let error = function(c){
+                const {
+                    msg= "",
+                    title= "",
+                    footer="",
+                } = c
+                Swal.fire({
+                    icon: 'error',
+                    title: title,
+                    text: msg,
+                    footer: footer,
+                })
+            }
+            return {
+                toast:toast,
+                success:success,
+                error: error,
+                }
         }
     </script>
   </body>
